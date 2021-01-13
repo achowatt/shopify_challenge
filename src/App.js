@@ -5,7 +5,7 @@ import stars2 from './stars/2-stars.svg';
 import stars1 from './stars/1-stars.svg';
 import search from './search.svg';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header>
