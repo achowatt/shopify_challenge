@@ -169,3 +169,59 @@ h2.nominations {
   padding: 5px;
   transform: rotate(-20deg);
 }
+
+.dark-filter {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0, 0, 0, 0.733);
+}
+
+.remove-btn {
+  background-color: #BC0000;
+  border:none;
+  padding: 0.5rem 2.5rem;
+  color:white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size:1.2rem;
+  border-radius: 4px;
+  position:absolute;
+  top:70%;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+
+/*** LOADING ICON ***/
+.loading-container {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width:100%;
+  height:50vw;
+  text-align: center;
+  
+}
+
+.loading-container > p {
+  color:#BC0000;
+}
+
+.loading-image {
+  border-radius: 50%;
+  width:3rem;
+  height:3rem;
+  border:inset 10px #BC0000;
+  animation: spin 0.3s linear infinite;
+  margin-bottom:10px;
+}
+
+@keyframes spin {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
