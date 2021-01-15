@@ -17,11 +17,10 @@ class SearchBar extends React.Component {
                     <input 
                         className="search-input" 
                         value={this.state.searchQuery} 
-                        type="search" onChange={(e) => this.setState({ searchQuery: e.target.value.toUpperCase()})}
+                        type="search" onChange={(e) => this.setState({ searchQuery: e.target.value})}
                         placeholder="Search Your Favourite Movie"
                     />
                 </form>
-                <div>{this.state.searchQuery}</div>
             </>
         )
     }

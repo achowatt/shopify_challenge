@@ -1,18 +1,35 @@
 import React from 'react';
 import MovieResultCard from './MovieResultCard';
 
-const MovieResults = () => (
+const MovieResults = ({onMovieSelect, movies, numOfMovies, nominationList}) => {
+
+  const movieCards = movies.map((movie)=>{
+    return (
+      <MovieResultCard 
+        onMovieSelect={onMovieSelect} 
+        imdbID={movie.imdbID} 
+        title={movie.Title} 
+        rating="4.3" 
+        year={movie.Year} 
+        imageUrl={movie.Poster}
+        movieInfo={movie}
+        nominationList={nominationList}
+      />
+    );
+  })
+
+  return (
     <div className="result-wrapper">
       <div className="result-text-container">
         <p>Results for "place holder"</p>
-        <p>(10 results)</p>
+        <p>({numOfMovies} total)</p>
       </div>
       <div className="movie-result-card-container">        
-        <MovieResultCard title="Tangled" rating="4.3" year="2010" imageUrl="https://m.media-amazon.com/images/M/MV5BMTAxNDYxMjg0MjNeQTJeQWpwZ15BbWU3MDcyNTk2OTM@._V1_SX300.jpg"/>
-        <MovieResultCard title="Harvest" rating="3.3" year="2010" imageUrl="https://m.media-amazon.com/images/M/MV5BMTAxNDYxMjg0MjNeQTJeQWpwZ15BbWU3MDcyNTk2OTM@._V1_SX300.jpg"/>
+        {movieCards}
       </div>
     </div>
-);
+  );
+}
 
 
 export default MovieResults;

@@ -2,10 +2,10 @@ import '../App.css';
 import React from "react";
 import NominatedSection from './NominatedSection';
 import LoadingImage from './LoadingImage'
+import ShoppiesImage from '../shoppies.svg'
 import MovieResultSection from './MovieResultSection';
 import SearchBar from './Searchbar';
 import axios from 'axios';
-import search from '../search.svg';
 
 const HeaderSection = (props) => {
   return(
@@ -17,33 +17,43 @@ const HeaderSection = (props) => {
   )
 }
 
+const placeHolderImage = () => {
+  return (
+    <img className="placeHolderImg" src={ShoppiesImage} />
+  )
+}
 class App extends React.Component {
 
-  state = {nominationList:[0], searchQuery: '', movieResults:[], errorMessage: '', queryStatus: '', loading: true };
+  state = {nominationList:[], movieResults:[], searchTerm:'', errorMessage: '', queryStatus: '', loading: false };
 
-  async onSearchSubmit(term) {
-    const response = await axios.get(`http://www.omdbapi.com/`, {
-      params: { 
-        apikey: 'c69b3d4a', 
-        s: term, 
-        i:'tt3896198'
-      }
-    })
-    
-    console.log(response.data);
+  onSearchSubmit = async (term) => {
+
+    try {
+      const response = await axios.get(`http://www.omdbapi.com/`, {
+        params: { apikey: 'c69b3d4a', s: term, i:'tt3896198' }
+      })
+      this.setState({ movieResults: response.data.Search, searchTerm: term});
+    } catch (err) {
+
+    }
+    console.log(this.state.movieResults);
   }
 
-  componentDidMount() {
-
+  onMovieSelect = (movie) => {
+    this.setState({nominationList: [...this.state.nominationList, movie ]});
+    console.log(this.state.nominationList);
   }
 
-  componentDidUpdate() {
-    //put search query here -- helps when state changes data loading
+  onRemove = (movieID) => {
+    console.log(movieID);
+    // const updatedList = this.state.nominationList.filter((movie) => {
+    //   return movie.mdbID !== movieID;
+    // })
+    // console.log("is this getting called a lot??");
+    // this.setState({nominationList: updatedList })
   }
 
   render() {
-    //Render based on loading state....
-
     return (
       <div className="App">
         <HeaderSection>
@@ -54,13 +64,15 @@ class App extends React.Component {
         <main>
             <section className="search-result-section">
               {/* Search */} <SearchBar onSubmit={this.onSearchSubmit}/>
+              
+              {(this.state.searchTerm == '') ? placeHolderImage() : ''}
 
               {/* Loader vs Search Movie Cards */}
-              {/* {this.state.loading ? <LoadingImage/> : <MovieResultSection/>} */}
+              {this.state.loading ? <LoadingImage/> : <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} numOfMovies={this.state.movieResults.length} onMovieSelect={this.onMovieSelect}/>}
             </section>
 
-            {/* Nominated Movie Section */}
-            <NominatedSection nominationList = {this.state.nominationList}/>
+              {/* const nominationList = this.props.nominationList; */}
+              {(!this.state.nominationList.length) ? "" : <NominatedSection nominationList = {this.state.nominationList} onRemove={this.onRemove}/>}
         </main>
       </div>
     );

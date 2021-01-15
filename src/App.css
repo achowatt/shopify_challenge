@@ -39,12 +39,14 @@ main {
   margin: 1rem auto;
   padding:15px;
   display:flex;
+  color:white;
 }
 
 /* left section */
 .search-result-section {
   width:100%;
   margin-right: 15px;
+  transition: width 1s;
 }
 
 .search-input {
@@ -74,7 +76,7 @@ main {
 }
 
 .movie-result-card{
-  border: solid 2px #F4F6F8;
+  border: solid 2px #2d2d2d;
   height: 16rem;
   display:flex;
   padding: 1rem;
@@ -116,7 +118,7 @@ h3.movie-title {
 }
 
 .nominate-button {
-  background-color:rgb(0, 0, 0);
+  background-color:var(--color-red);
   border: none;
   color:white;
   text-transform: uppercase;
@@ -126,7 +128,7 @@ h3.movie-title {
 /* right section */
 .nomination-section {
   width:23rem;
-  background: #F4F6F8;
+  background: #191919;
   border-radius: 5px;
 }
 
@@ -224,4 +226,14 @@ h2.nominations {
 @keyframes spin {
   from {transform: rotate(0deg);}
   to {transform: rotate(360deg);}
+}
+
+
+.placeHolderImage {
+  height: 55vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-33%);
+  max-width: 850px;
 }
