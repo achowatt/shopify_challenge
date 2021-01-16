@@ -2,7 +2,6 @@ import React from "react";
 import NominatedCard from './NominatedCard';
 
 class NominatedSection extends React.Component {
-    
     render(){
 
         const showNominationList = this.props.nominationList.map((movie)=>{
@@ -15,7 +14,9 @@ class NominatedSection extends React.Component {
 
         return (
         <section className="nomination-section">
-            <h2 className="nominations">My Nominations</h2>
+            <h2 className="nominations">
+                My Nominations
+            </h2>
             <div className="nominated-card-container">
                 {/* <NominatedCard title="UP" >
                     <div style={{background:"black"}}> Remove </div>
