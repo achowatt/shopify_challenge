@@ -6,6 +6,7 @@ const MovieResults = ({onMovieSelect, movies,totalResults,page, numOfMovies, nom
   const movieCards = movies.map((movie)=>{
     return (
       <MovieResultCard 
+        key={movie.imdbID}
         onMovieSelect={onMovieSelect} 
         imdbID={movie.imdbID} 
         title={movie.Title} 
@@ -22,7 +23,8 @@ const MovieResults = ({onMovieSelect, movies,totalResults,page, numOfMovies, nom
     <div className="result-wrapper">
       <div className="result-text-container">
         <p>Results for "{term}"</p>
-        <p>page {page} of {Math.ceil(totalResults/10)}</p>
+        {/* <p>page {page} of {Math.ceil(totalResults/10)}</p> */}
+        <p>(Total {totalResults} Movies)</p>
       </div>
       <div className="movie-result-card-container">        
         {movieCards}

@@ -6,7 +6,7 @@ class LoadMoreButton extends React.Component {
         return (
             <div className="load-more-container">
                 <button className="load-more-button" onClick={this.onLoadMore}>
-                <p>Next Page</p>
+                <p>Load 10 More</p>
                 </button>
             </div>
         )

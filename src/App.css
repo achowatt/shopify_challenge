@@ -10,19 +10,32 @@
   --color-red: #BE0606;
   --color-black: #000000;
 }
+@media only screen and (max-width: 600px) {
+  :root {
+    font-size: 95%;
+  }
+}
 
 header {
   background-color: var(--color-black);
+  position:fixed;
+  width: 100%;
+  top:0;
+  z-index: 99;
 }
 
 .header-container{
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
-  height: 8rem;
+  height: 11rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.header-container .wrapper {
+  display:flex;
+  justify-content: space-between;
 }
 
 h1 {
@@ -31,15 +44,64 @@ h1 {
   color: var(--color-red);
 }
 
+@media only screen and (max-width: 500px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
 .header-description {
   font-family: 'Manrope', sans-serif;
   color:white;
+  padding-bottom: 1rem;
 }
 
+.see-nominations{
+  cursor:pointer;
+  background:unset;
+  font-weight: bolder;
+  color: rgb(214, 214, 214);
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.3rem;
+  box-sizing: content-box;
+  border: rgb(29, 29, 29) 2px solid;
+  padding: 0.5rem;
+  border-radius: 1px;
+  height: 4rem;
+}
+
+.see-nominations img{
+  width:2.2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .see-nominations{
+    background:unset;
+    display:flex;
+    font-size:0.2rem;
+    margin-right:0.5rem;
+    padding-bottom: 0.5rem;
+    border:none;
+    height: 3rem;
+  }
+  .see-nominations img{
+    width:2rem;
+    box-sizing: content-box;
+    border: #2d2d2d 2px solid;
+    padding: 0.4rem;
+    border-radius: 5px;
+  }
+
+  .see-nominations p {
+    display:none;
+  }
+}
 main {
   max-width: 1000px;
-  margin: 0 auto;
-  padding:15px;
+  margin: 9rem auto 0;
+  padding:1rem 1rem 0;
   display:flex;
   flex-direction: column;
   color:white;
@@ -48,8 +110,9 @@ main {
 /* left section */
 .search-result-section {
   width:100%;
-  margin-right: 15px;
+  height: calc(100vh - 11rem);
   transition: width 1s;
+  position:relative;
 }
 
 .search-input {
@@ -69,20 +132,21 @@ main {
 .result-text-container{
   display:flex;
   justify-content: space-between;
-  padding:1rem;
+  padding:1rem 0;
 }
 
 .movie-result-card-container{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-gap: 0.4rem;
 }
 
 .movie-result-card{
   border: solid 2px #2d2d2d;
-  height: 16rem;
+  height: 23rem;
   display:flex;
-  padding: 1rem;
+  flex-direction:column;
+  padding: 0.6rem;
 }
 
 .nominated {
@@ -90,24 +154,29 @@ main {
 }
 
 .movie-img {
-  width: 10rem;
-  height: 100%;
+  width: 100%;
+  height: 15rem;
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 3px;
 }
 
 .movie-description {
-  margin-left: 1rem;
-  width: calc(100% - 10rem);
+  /* margin-left: 1rem;
+  width: calc(100% - 10rem); */
   font-family: 'Manrope', sans-serif;
   display:grid;
-  grid-template-rows: 3fr 2fr 1fr;
+  grid-template-rows: 4.9rem 2.4rem;
 }
 
 h3.movie-title {
   font-weight: lighter;
+  font-size: 0.8rem;
+  text-align: center;
+  display: grid;
+  place-content: center;
 }
+
 .movie-rating {
   font-size: 0.8rem;
   /* font-weight: bold; */
@@ -129,15 +198,30 @@ h3.movie-title {
 }
 
 /* right section */
-.nomination-section, .welcome-section {
-  /* width:23rem; */
-  /* background: #191919; */
+.nomination-section {
+  background: #000000;
   border-radius: 5px;
+  position: fixed;
+  top: 7rem;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 7rem);
+  padding: 1rem;
+  z-index: 99;
+  overflow: auto;
+  
+}
+
+@media screen and (max-width:500px){
+  .nomination-section {
+    top:6rem;
+    height: calc(100vh - 6rem);
+  }
 }
 
 .welcome-section {
   /* height: 100vw; */
-  height: calc(100vh - 10rem);
+  height: 100%;
   padding:1rem;
   display:flex;
   flex-direction: column;
@@ -160,6 +244,8 @@ h3.movie-title {
   padding:0 1rem 1rem;
   max-width:100vw;
   overflow-x: auto;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .nominated-card {
@@ -174,9 +260,9 @@ h3.movie-title {
   width: 15rem;
   height: 22rem;
   margin: 1rem 0;
-  background-size: cover;
+  background-size:cover;
   background-repeat: no-repeat;
-  border: 0 solid black;
+  border: 3px solid black;
   border-radius: 4px;
 }
 
@@ -185,6 +271,8 @@ h2.nominations {
   display:grid;
   place-content: center;
   text-align:center;
+  font-size: 2.2rem;
+  height: 20%;
 }
 
 .nominated-stamp {
@@ -255,9 +343,8 @@ h2.nominations {
 }
 
 .placeHolderImg-container{
-  height: calc(100vh - 12.8rem);
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
 }
 .placeHolderImg {
   width: 90%;
@@ -271,6 +358,7 @@ h2.nominations {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 6rem;
 }
 
 
