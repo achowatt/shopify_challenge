@@ -14,7 +14,7 @@ class SeeNominations extends React.Component {
         return (
             <button type="button" className="see-nominations" onClick={this.onNominationButtonClick}>
                 <img src={trophy}></img>
-                <p>My Nominations</p>
+                {this.state.nominationListOpen ? <p>See Nominations</p> : <p>Back to Movies</p>}
             </button>
         )
     }

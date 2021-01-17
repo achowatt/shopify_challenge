@@ -19,8 +19,15 @@ class App extends React.Component {
     loading: false, 
     page: 1,
     totalResults: 0,
-    seeNominations: false
+    seeNominations: false,
+    fiveNominations: false
   };
+
+  reachedFiveNominations = () => {
+    return this.setState({
+      fiveNominations: true, seeNominations: true
+    })
+  }
 
   onSearchSubmit = async (term) => {
     const response = await axios.get(`http://www.omdbapi.com/`, {
@@ -28,7 +35,6 @@ class App extends React.Component {
     })
     this.setState({ movieResults: response.data.Search, searchTerm: term, totalResults: response.data.totalResults, page: 1});
     console.log(response.data);
-    // console.log(this.state.movieResults);
   }
 
   onLoadMore = async() =>{
@@ -40,29 +46,35 @@ class App extends React.Component {
   }
 
   onMovieSelect = (movie) => {
-    this.setState({nominationList: [...this.state.nominationList, movie ]});
-    console.log(this.state.nominationList);
+    if (this.state.nominationList.length === 4) {
+      this.setState({seeNominations: true, fiveNominations: true, nominationList: [...this.state.nominationList, movie] })
+    } else {
+      this.setState({nominationList: [...this.state.nominationList, movie] })
+    }
   }
 
   onRemove = (movieID) => {
-    console.log(movieID);
     const updatedList = this.state.nominationList.filter((movie) => {
       return movie.imdbID !== movieID;
     });
-    this.setState({nominationList: updatedList });
+    this.setState({nominationList: updatedList, fiveNominations: false });
   }
 
   onNominationButtonClick = (clickStatus) => {
     this.setState({seeNominations: clickStatus});
   }
 
+  onClear = () => {
+    this.setState({nominationList:[], fiveNominations: false })
+  }
+
   render() {
 
     const LoadMore = () => {
       if (this.state.movieResults.length && (this.state.page * 10 < this.state.totalResults)){
-        return (<div className="load-more-container">
-          <button className="load-more-button" onClick={this.onLoadMore}>
-          <p>Load 10 More</p>
+        return (<div className="button-container">
+          <button className="button" onClick={this.onLoadMore}>
+          <p>Load More Movies</p>
           </button>
         </div>)
       }
@@ -90,7 +102,7 @@ class App extends React.Component {
               {LoadMore()}
             </section>
 
-              { this.state.seeNominations ? <NominatedSection nominationList = {this.state.nominationList} onRemove={this.onRemove}/> : ""}
+              { this.state.seeNominations ? <NominatedSection nominationList = {this.state.nominationList} fiveNominations = {this.state.fiveNominations} onRemove={this.onRemove} onClear={this.onClear}/> : ""}
         </main>
       </div>
     );
