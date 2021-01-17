@@ -2,12 +2,11 @@ import '../App.css';
 import React from "react";
 import NominatedSection from './NominatedSection';
 import LoadingImage from './LoadingImage';
-import PlaceHolderImg from './PlaceHolderImg';
 import MovieResultSection from './MovieResultSection';
 import SearchBar from './Searchbar';
 import WelcomeMessage from './WelcomeMessage';
+import SeeNominations from './SeeNominations';
 import axios from 'axios';
-// import LoadMoreButton from './LoadMoreButton';
 
 class App extends React.Component {
 
@@ -19,8 +18,16 @@ class App extends React.Component {
     queryStatus: '', 
     loading: false, 
     page: 1,
-    totalResults: 0
+    totalResults: 0,
+    seeNominations: false,
+    fiveNominations: false
   };
+
+  reachedFiveNominations = () => {
+    return this.setState({
+      fiveNominations: true, seeNominations: true
+    })
+  }
 
   onSearchSubmit = async (term) => {
     const response = await axios.get(`http://www.omdbapi.com/`, {
@@ -28,38 +35,46 @@ class App extends React.Component {
     })
     this.setState({ movieResults: response.data.Search, searchTerm: term, totalResults: response.data.totalResults, page: 1});
     console.log(response.data);
-    // console.log(this.state.movieResults);
   }
 
   onLoadMore = async() =>{
     const response = await axios.get(`http://www.omdbapi.com/`, {
       params: { apikey: 'c69b3d4a', type:"movie", s: this.state.searchTerm, i:'tt3896198', page: this.state.page + 1}
     })
-    this.setState({ movieResults: response.data.Search, page: this.state.page + 1});
+    this.setState({ movieResults: [...this.state.movieResults, ...response.data.Search], page: this.state.page + 1});
     console.log(response.data);
   }
 
   onMovieSelect = (movie) => {
-    this.setState({nominationList: [...this.state.nominationList, movie ]});
-    console.log(this.state.nominationList);
+    if (this.state.nominationList.length === 4) {
+      this.setState({seeNominations: true, fiveNominations: true, nominationList: [...this.state.nominationList, movie] })
+    } else {
+      this.setState({nominationList: [...this.state.nominationList, movie] })
+    }
   }
 
   onRemove = (movieID) => {
-    console.log(movieID);
-    // const updatedList = this.state.nominationList.filter((movie) => {
-    //   return movie.mdbID !== movieID;
-    // })
-    // console.log("is this getting called a lot??");
-    // this.setState({nominationList: updatedList })
+    const updatedList = this.state.nominationList.filter((movie) => {
+      return movie.imdbID !== movieID;
+    });
+    this.setState({nominationList: updatedList, fiveNominations: false });
+  }
+
+  onNominationButtonClick = (clickStatus) => {
+    this.setState({seeNominations: clickStatus});
+  }
+
+  onClear = () => {
+    this.setState({nominationList:[], fiveNominations: false })
   }
 
   render() {
 
     const LoadMore = () => {
       if (this.state.movieResults.length && (this.state.page * 10 < this.state.totalResults)){
-        return (<div className="load-more-container">
-          <button className="load-more-button" onClick={this.onLoadMore}>
-          <p>Next Page</p>
+        return (<div className="button-container">
+          <button className="button" onClick={this.onLoadMore}>
+          <p>Load More Movies</p>
           </button>
         </div>)
       }
@@ -69,22 +84,25 @@ class App extends React.Component {
       <div className="App">
         <header>
           <div className="header-container">
-            <h1>The Shoppies</h1>
-            <p className="header-description">Movie Awards for Entrepreneurs</p>
+            <div className="wrapper">
+              <div className="header-text">
+                <h1>The Shoppies</h1>
+                <p className="header-description">Movie Awards for Entrepreneurs</p>
+              </div>
+              <SeeNominations onClick={this.onNominationButtonClick}/> {/* My Nominations Button */}
+            </div>
+            <SearchBar onSubmit={this.onSearchSubmit}/> {/* Search */} 
           </div>
          </header>
 
-        <main>
+        <main className={this.state.seeNominations ? "stop-scroll" : "auto-scroll"}>
             <section className="search-result-section">
-              {/* Search */} <SearchBar onSubmit={this.onSearchSubmit}/>
-
               {/* Loader vs Search Movie Cards */}
-              {this.state.loading ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} page={this.state.page} numOfMovies={this.state.movieResults.length} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <PlaceHolderImg/> }
+              {this.state.loading ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
               {LoadMore()}
             </section>
 
-              {/* const nominationList = this.props.nominationList; */}
-              {(!this.state.nominationList.length) ? <WelcomeMessage/> : <NominatedSection nominationList = {this.state.nominationList} onRemove={this.onRemove}/>}
+              { this.state.seeNominations ? <NominatedSection nominationList = {this.state.nominationList} fiveNominations = {this.state.fiveNominations} onRemove={this.onRemove} onClear={this.onClear}/> : ""}
         </main>
       </div>
     );
