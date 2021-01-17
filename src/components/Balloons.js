@@ -1,5 +1,4 @@
 import React from "react";
-import balloon1 from "../balloon1.svg";
 
 const Balloons = ({speed1, speed2, color1, color2, color3}) => {
     return(

@@ -4,7 +4,7 @@ class MovieResultCard extends React.Component {
     render() {
 
         const nominated = this.props.nominationList.find((movie)=>{
-            if (movie.imdbID == this.props.imdbID){
+            if (movie.imdbID === this.props.imdbID){
                 return true;
             } 
         });
@@ -21,7 +21,7 @@ class MovieResultCard extends React.Component {
                     type="button" 
                     className="nominate-button" 
                     disabled={nominated}
-                    style = {nominated ? {background:"grey", pointerEvents: "none"} : {background:"rgb(123, 0, 0)"}}
+                    style = {nominated || this.props.fiveNominations ? {background:"grey", pointerEvents: "none"} : {background:"rgb(123, 0, 0)"}}
                     onClick = {() => this.props.onMovieSelect(this.props.movieInfo)}>
                     {nominated ? "nominated" : "nominate"}
                 </button>

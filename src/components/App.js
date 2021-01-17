@@ -1,7 +1,6 @@
 import '../App.css';
 import React from "react";
 import NominatedSection from './NominatedSection';
-import LoadingImage from './LoadingImage';
 import MovieResultSection from './MovieResultSection';
 import SearchBar from './Searchbar';
 import WelcomeMessage from './WelcomeMessage';
@@ -98,7 +97,7 @@ class App extends React.Component {
         <main className={this.state.seeNominations ? "stop-scroll" : "auto-scroll"}>
             <section className="search-result-section">
               {/* Loader vs Search Movie Cards */}
-              {this.state.loading ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
+              {this.state.movieResults.length ? <MovieResultSection fiveNominations = {this.state.fiveNominations} nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
               {LoadMore()}
             </section>
 

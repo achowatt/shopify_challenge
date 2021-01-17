@@ -3,7 +3,7 @@ import MovieResultCard from './MovieResultCard';
 import trophyV2 from '../trophy_v2.svg';
 
 
-const MovieResults = ({onMovieSelect, movies,totalResults, nominationList, term}) => {
+const MovieResults = ({onMovieSelect, movies,totalResults, nominationList, term, fiveNominations}) => {
   const movieCards = movies.map((movie)=>{
     return (
       <MovieResultCard 
@@ -16,6 +16,7 @@ const MovieResults = ({onMovieSelect, movies,totalResults, nominationList, term}
         imageUrl={movie.Poster === "N/A" ? trophyV2 : movie.Poster}
         movieInfo={movie}
         nominationList={nominationList}
+        fiveNominations = {fiveNominations} 
       />
     );
   })

@@ -13,10 +13,10 @@ class NominatedCard extends React.Component {
             //show the remove button
             <div className="nominated-card nominated-movie-img" 
                  onClick={this.handleClick} 
-                 style={{backgroundImage:`url(${this.props.image == "N/A" ? trophyV2 : this.props.image})`}}
+                 style={{backgroundImage:`url(${this.props.image === "N/A" ? trophyV2 : this.props.image})`}}
             >
                 {/* <div className="nominated-movie-description"> */}
-                    {this.props.image == trophyV2 ? <p className="nominated-title">{this.props.title}</p> : ""}
+                    {this.props.image === trophyV2 ? <p className="nominated-title">{this.props.title}</p> : ""}
                     <div className= {`nominated-stamp`}>
                     NOMINATED
                     </div>
