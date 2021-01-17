@@ -1,6 +1,5 @@
 import React from 'react';
-import ShoppiesImage from '../shoppies.svg'
-import ShoppiesImage2 from '../shoppies2.svg'
+import ShoppiesImage2 from '../shoppies2.svg';
 
 const PlaceHolderImg = () => {
     return (

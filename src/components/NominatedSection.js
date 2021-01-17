@@ -1,13 +1,14 @@
 import React from "react";
 import NominatedCard from './NominatedCard';
 import PlaceHolderImg from './PlaceHolderImg';
+import trophyV2 from '../trophy_v2.svg';
 
 class NominatedSection extends React.Component {
     render(){
 
         const showNominationList = this.props.nominationList.map((movie)=>{
             return(
-                <NominatedCard key={movie.imdbID} title={movie.Title} image={movie.Poster} id={movie.imdbID} onRemove={this.props.onRemove}>
+                <NominatedCard key={movie.imdbID} title={movie.Title} image={movie.Poster === "N/A" ? trophyV2 : movie.Poster } id={movie.imdbID} onRemove={this.props.onRemove}>
                 <div style={{background:"black"}}> Remove </div>
                 </NominatedCard>
             );

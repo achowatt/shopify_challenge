@@ -7,7 +7,6 @@ import SearchBar from './Searchbar';
 import WelcomeMessage from './WelcomeMessage';
 import SeeNominations from './SeeNominations';
 import axios from 'axios';
-// import LoadMoreButton from './LoadMoreButton';
 
 class App extends React.Component {
 
@@ -47,11 +46,10 @@ class App extends React.Component {
 
   onRemove = (movieID) => {
     console.log(movieID);
-    // const updatedList = this.state.nominationList.filter((movie) => {
-    //   return movie.mdbID !== movieID;
-    // })
-    // console.log("is this getting called a lot??");
-    // this.setState({nominationList: updatedList })
+    const updatedList = this.state.nominationList.filter((movie) => {
+      return movie.imdbID !== movieID;
+    });
+    this.setState({nominationList: updatedList });
   }
 
   onNominationButtonClick = (clickStatus) => {
@@ -79,24 +77,19 @@ class App extends React.Component {
                 <h1>The Shoppies</h1>
                 <p className="header-description">Movie Awards for Entrepreneurs</p>
               </div>
-
-              <SeeNominations onClick={this.onNominationButtonClick}/>
-              {/* <SeeNominations/>  */}
-
+              <SeeNominations onClick={this.onNominationButtonClick}/> {/* My Nominations Button */}
             </div>
-            {/* Search */} <SearchBar onSubmit={this.onSearchSubmit}/>
+            <SearchBar onSubmit={this.onSearchSubmit}/> {/* Search */} 
           </div>
          </header>
 
-        <main>
+        <main className={this.state.seeNominations ? "stop-scroll" : "auto-scroll"}>
             <section className="search-result-section">
               {/* Loader vs Search Movie Cards */}
-              {this.state.loading ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} page={this.state.page} numOfMovies={this.state.movieResults.length} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
+              {this.state.loading ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
               {LoadMore()}
             </section>
 
-              {/* const nominationList = this.props.nominationList; */}
-              {/* {(!this.state.nominationList.length) ? "": <NominatedSection nominationList = {this.state.nominationList} onRemove={this.onRemove}/>} */}
               { this.state.seeNominations ? <NominatedSection nominationList = {this.state.nominationList} onRemove={this.onRemove}/> : ""}
         </main>
       </div>

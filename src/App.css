@@ -50,6 +50,12 @@ h1 {
   }
 }
 
+@media only screen and (max-width: 378px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
 .header-description {
   font-family: 'Manrope', sans-serif;
   color:white;
@@ -98,6 +104,7 @@ h1 {
     display:none;
   }
 }
+
 main {
   max-width: 1000px;
   margin: 9rem auto 0;
@@ -105,6 +112,20 @@ main {
   display:flex;
   flex-direction: column;
   color:white;
+  overflow-y: scroll;
+}
+
+main::-webkit-scrollbar {
+  display:none;
+}
+
+main {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.stop-scroll {
+  overflow: hidden;
 }
 
 /* left section */
@@ -158,6 +179,16 @@ main {
   height: 15rem;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 3px;
+}
+
+.movie-img-unavailable{
+  width: 100%;
+  height: 15rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 3px;
 }
 
@@ -190,7 +221,6 @@ h3.movie-title {
 }
 
 .nominate-button {
-  background-color:var(--color-red);
   border: none;
   color:white;
   text-transform: uppercase;
@@ -254,6 +284,7 @@ h3.movie-title {
   align-items: center;
   text-align: center;
   filter:brightness(85%);
+  cursor: pointer;
 }
 
 .nominated-movie-img {
@@ -266,6 +297,16 @@ h3.movie-title {
   border-radius: 4px;
 }
 
+.nominated-img-unavailable {
+  width: 15rem;
+  height: 22rem;
+  margin: 1rem 0;
+  background-size:contain;
+  background-repeat: no-repeat;
+  border: 3px solid black;
+  border-radius: 4px;
+}
+
 h2.nominations {
   font-family: 'Quicksand', sans-serif;
   display:grid;
@@ -273,6 +314,15 @@ h2.nominations {
   text-align:center;
   font-size: 2.2rem;
   height: 20%;
+}
+
+.nominated-title {
+  position:absolute;
+  top: 2rem;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px var(--color-black);
 }
 
 .nominated-stamp {
@@ -309,8 +359,14 @@ h2.nominations {
   top:70%;
   left:50%;
   transform: translateX(-50%);
+  cursor: pointer;
 }
 
+@media (hover:hover) {
+  .remove-btn:hover {
+    background-color: #970101;
+  }
+}
 
 /*** LOADING ICON ***/
 .loading-container {
@@ -349,6 +405,7 @@ h2.nominations {
 .placeHolderImg {
   width: 90%;
   max-width: 850px;
+  height: 60vh;
 }
 
 
