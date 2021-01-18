@@ -41,7 +41,7 @@ class App extends React.Component {
 
 
   onLoadMore = async() =>{
-    const response = await axios.get(`http://www.omdbapi.com/`, {
+    const response = await axios.get(`https://www.omdbapi.com/`, {
       params: { apikey: 'c69b3d4a', type:"movie", s: this.state.searchTerm, i:'tt3896198', page: this.state.page + 1}
     })
     this.setState({ movieResults: [...this.state.movieResults, ...response.data.Search], page: this.state.page + 1});
