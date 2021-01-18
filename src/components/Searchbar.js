@@ -3,11 +3,14 @@ import React from 'react';
 
 class SearchBar extends React.Component {
 
-    state = { searchQuery:''};
+    state = { searchQuery: ''};
 
     onSearchSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.state.searchQuery);
+        if (this.state.searchQuery !== '') {
+            this.props.onSubmit(this.state.searchQuery);
+        }
+
     }
 
     render() {

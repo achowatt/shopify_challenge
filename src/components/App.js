@@ -5,6 +5,7 @@ import MovieResultSection from './MovieResultSection';
 import SearchBar from './Searchbar';
 import WelcomeMessage from './WelcomeMessage';
 import SeeNominations from './SeeNominations';
+import LoadingImage from './LoadingImage';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -15,11 +16,10 @@ class App extends React.Component {
     searchTerm:'', 
     errorMessage: '', 
     queryStatus: '', 
-    loading: false, 
     page: 1,
     totalResults: 0,
     seeNominations: false,
-    fiveNominations: false
+    fiveNominations: false,
   };
 
   reachedFiveNominations = () => {
@@ -32,9 +32,13 @@ class App extends React.Component {
     const response = await axios.get(`http://www.omdbapi.com/`, {
       params: { apikey: 'c69b3d4a', type:"movie", s: term, i:'tt3896198', page: 1}
     })
-    this.setState({ movieResults: response.data.Search, searchTerm: term, totalResults: response.data.totalResults, page: 1});
-    console.log(response.data);
+    if (response.data.Response === "True") {
+      this.setState({ movieResults: response.data.Search, searchTerm: term, totalResults: response.data.totalResults, page: 1, errorMessage:''});
+    } else {
+      this.setState({errorMessage: 'No results found! Please type valid characters with minimum of 3 letters.'})
+    }
   }
+
 
   onLoadMore = async() =>{
     const response = await axios.get(`http://www.omdbapi.com/`, {
@@ -70,7 +74,7 @@ class App extends React.Component {
   render() {
 
     const LoadMore = () => {
-      if (this.state.movieResults.length && (this.state.page * 10 < this.state.totalResults)){
+      if (this.state.movieResults.length && (this.state.page * 10 < this.state.totalResults) && this.state.errorMessage === ''){
         return (<div className="button-container">
           <button className="button" onClick={this.onLoadMore}>
           <p>Load More Movies</p>
@@ -97,7 +101,8 @@ class App extends React.Component {
         <main className={this.state.seeNominations ? "stop-scroll" : "auto-scroll"}>
             <section className="search-result-section">
               {/* Loader vs Search Movie Cards */}
-              {this.state.movieResults.length ? <MovieResultSection fiveNominations = {this.state.fiveNominations} nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
+              {this.state.errorMessage !== '' ? <p className="error-msg">{this.state.errorMessage}</p> : ""}
+              {this.state.errorMessage !== '' ? <LoadingImage/> : this.state.movieResults.length ? <MovieResultSection fiveNominations = {this.state.fiveNominations} nominationList = {this.state.nominationList } movies={this.state.movieResults} totalResults = {this.state.totalResults} onMovieSelect={this.onMovieSelect} term={this.state.searchTerm}/> : <WelcomeMessage/>  }
               {LoadMore()}
             </section>
 
