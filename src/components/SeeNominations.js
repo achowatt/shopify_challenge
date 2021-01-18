@@ -2,22 +2,15 @@ import React from "react";
 import trophy from "../assets/trophy.svg";
 
 class SeeNominations extends React.Component {
-  state = {nominationListOpen: false};
-
-  onNominationButtonClick = () => {
-    this.setState({nominationListOpen: !this.state.nominationListOpen});
-    this.props.onClick(this.state.nominationListOpen);
-  };
-
   render() {
     return (
       <button
         type="button"
         className="see-nominations"
-        onClick={this.onNominationButtonClick}
+        onClick={() => this.props.onClick()}
       >
         <img src={trophy} alt="trophy"></img>
-        <p>My Nominations</p>
+        <p>{this.props.seeNominations ? "Search" : "Nominations"}</p>
       </button>
     );
   }

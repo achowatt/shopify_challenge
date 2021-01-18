@@ -112,9 +112,9 @@ class App extends React.Component {
     });
   };
 
-  onNominationButtonClick = (clickStatus) => {
+  onNominationButtonClick = () => {
     this.setState({
-      seeNominations: clickStatus,
+      seeNominations: !this.state.seeNominations,
     });
     this.updateBodyStyles();
   };
@@ -152,7 +152,10 @@ class App extends React.Component {
                 <h1> The Shoppies </h1>
                 <p className="header-description"> Movie Awards for Entrepreneurs </p>
               </div>
-              <SeeNominations onClick={this.onNominationButtonClick} />
+              <SeeNominations
+                onClick={this.onNominationButtonClick}
+                seeNominations={this.state.seeNominations}
+              />
             </div>
             <SearchBar onSubmit={this.onSearchSubmit} />
           </div>
