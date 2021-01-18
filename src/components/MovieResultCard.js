@@ -3,13 +3,7 @@ import trophyV2 from '../trophy_v2.svg';
 class MovieResultCard extends React.Component {
     render() {
 
-        const nominated = this.props.nominationList.find((movie)=>{
-            if (movie.imdbID === this.props.imdbID){
-                return true;
-            } else {
-                return false;
-            }
-        });
+        const nominated = this.props.nominationList.find((movie) => movie.imdbID === this.props.imdbID);
 
         return (
             <div className="movie-result-card"
