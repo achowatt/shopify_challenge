@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   onSearchSubmit = async (term) => {
-    const response = await axios.get(`http://www.omdbapi.com/`, {
+    const response = await axios.get(`https://www.omdbapi.com/`, {
       params: { apikey: 'c69b3d4a', type:"movie", s: term, i:'tt3896198', page: 1}
     })
     if (response.data.Response === "True") {
