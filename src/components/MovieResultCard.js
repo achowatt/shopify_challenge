@@ -1,5 +1,5 @@
 import React from "react";
-import trophyV2 from "../trophy_v2.svg";
+import trophyV2 from "../assets/trophy_v2.svg";
 class MovieResultCard extends React.Component {
   render() {
     const nominated = this.props.nominationList.find(

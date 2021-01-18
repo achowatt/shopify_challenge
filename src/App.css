@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,7 +9,7 @@
 :root {
   font-size: 100%;
   /* CSS variables */
-  --color-red: #BE0606;
+  --color-red: #be0606;
   --color-black: #000000;
 }
 @media only screen and (max-width: 600px) {
@@ -16,15 +18,28 @@
   }
 }
 
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: black;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 header {
   background-color: var(--color-black);
-  position:fixed;
+  position: fixed;
   width: 100%;
-  top:0;
+  top: 0;
   z-index: 99;
 }
 
-.header-container{
+.header-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -34,12 +49,12 @@ header {
   justify-content: center;
 }
 .header-container .wrapper {
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 
 h1 {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 3rem;
   color: var(--color-red);
 }
@@ -57,18 +72,18 @@ h1 {
 }
 
 .header-description {
-  font-family: 'Manrope', sans-serif;
-  color:white;
+  font-family: "Manrope", sans-serif;
+  color: white;
   padding-bottom: 1rem;
 }
 
-.see-nominations{
-  cursor:pointer;
-  background:unset;
+.see-nominations {
+  cursor: pointer;
+  background: unset;
   font-weight: bolder;
   color: rgb(214, 214, 214);
   border: none;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   text-transform: uppercase;
   font-size: 0.3rem;
   box-sizing: content-box;
@@ -78,22 +93,22 @@ h1 {
   height: 4rem;
 }
 
-.see-nominations img{
-  width:2.2rem;
+.see-nominations img {
+  width: 2.2rem;
 }
 
 @media only screen and (max-width: 500px) {
-  .see-nominations{
-    background:unset;
-    display:flex;
-    font-size:0.2rem;
-    margin-right:0.5rem;
+  .see-nominations {
+    background: unset;
+    display: flex;
+    font-size: 0.2rem;
+    margin-right: 0.5rem;
     padding-bottom: 0.5rem;
-    border:none;
+    border: none;
     height: 3rem;
   }
-  .see-nominations img{
-    width:2rem;
+  .see-nominations img {
+    width: 2rem;
     box-sizing: content-box;
     border: #2d2d2d 2px solid;
     padding: 0.4rem;
@@ -101,26 +116,26 @@ h1 {
   }
 
   .see-nominations p {
-    display:none;
+    display: none;
   }
 }
 
 main {
   max-width: 1000px;
   margin: 9rem auto 0;
-  padding:1rem 1rem 0;
-  display:flex;
+  padding: 1rem 1rem 0;
+  display: flex;
   flex-direction: column;
-  color:white;
+  color: white;
 }
 
 main::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 
 main {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .stop-scroll {
@@ -133,10 +148,10 @@ main {
 
 /* left section */
 .search-result-section {
-  width:100%;
+  width: 100%;
   height: calc(100vh - 11rem);
   transition: width 1s;
-  position:relative;
+  position: relative;
 }
 
 .search-input {
@@ -144,38 +159,38 @@ main {
   width: 100%;
   padding: 1.5rem 1rem;
   border-radius: 5px;
-  border: 1px solid #D8D8D8;
+  border: 1px solid #d8d8d8;
   font-size: 1rem;
   text-align: center;
-  background-image: url('./search.svg');
+  background-image: url("./assets/search.svg");
   background-repeat: no-repeat, repeat;
   background-position: right 1rem top 50%, 0 0;
   background-size: 1.2rem;
 }
 
-.result-text-container{
-  display:flex;
+.result-text-container {
+  display: flex;
   justify-content: space-between;
-  padding:1rem 0;
+  padding: 1rem 0;
 }
 
-.movie-result-card-container{
+.movie-result-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   grid-gap: 0.4rem;
   margin-bottom: 1rem;
 }
 
-.movie-result-card{
+.movie-result-card {
   border: solid 2px #2d2d2d;
   height: 23rem;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   padding: 0.6rem;
 }
 
 .nominated {
-  filter:opacity(10%);
+  filter: opacity(10%);
 }
 
 .movie-img {
@@ -187,7 +202,7 @@ main {
   border-radius: 3px;
 }
 
-.movie-img-unavailable{
+.movie-img-unavailable {
   width: 100%;
   height: 15rem;
   background-size: contain;
@@ -199,8 +214,8 @@ main {
 .movie-description {
   /* margin-left: 1rem;
   width: calc(100% - 10rem); */
-  font-family: 'Manrope', sans-serif;
-  display:grid;
+  font-family: "Manrope", sans-serif;
+  display: grid;
   grid-template-rows: 4.9rem 2.4rem;
 }
 
@@ -215,9 +230,9 @@ h3.movie-title {
 .movie-rating {
   font-size: 0.8rem;
   /* font-weight: bold; */
-  display:flex;
+  display: flex;
   flex-direction: column;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: space-evenly;
 }
 
@@ -226,7 +241,7 @@ h3.movie-title {
 
 .nominate-button {
   border: none;
-  color:white;
+  color: white;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -246,12 +261,11 @@ h3.movie-title {
   overflow-x: hidden;
   /* display: grid;
   grid-template-rows: 1fr auto 1fr; */
-  
 }
 
-@media screen and (max-width:500px){
+@media screen and (max-width: 500px) {
   .nomination-section {
-    top:6rem;
+    top: 6rem;
     height: calc(100vh - 6rem);
   }
 }
@@ -259,25 +273,25 @@ h3.movie-title {
 .welcome-section {
   /* height: 100vw; */
   height: 100%;
-  padding:1rem;
-  display:flex;
+  padding: 1rem;
+  display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   max-width: 500px;
   margin: 0 auto;
 }
 
 .welcome-section h3 {
-  font-size:2rem;
+  font-size: 2rem;
   color: grey;
 }
 .welcome-section p {
-  padding:1rem;
+  padding: 1rem;
 }
 
-.nominated-card-container{
+.nominated-card-container {
   grid-template-columns: repeat(auto-fit, 13rem);
   margin: 0 auto;
   max-width: 1000px;
@@ -288,26 +302,26 @@ h3.movie-title {
 }
 
 .nominated-card {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  filter:brightness(85%);
+  filter: brightness(85%);
   cursor: pointer;
 }
 
 .nominated-movie-img {
   height: 22rem;
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 4px;
   border: 4px solid black;
-  position:relative;
+  position: relative;
 }
 
 @media screen and (max-width: 670px) {
-  .nominated-card-container{
+  .nominated-card-container {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
     grid-gap: 1rem;
   }
@@ -320,22 +334,22 @@ h3.movie-title {
   width: 15rem;
   height: 22rem;
   margin: 1rem 0;
-  background-size:contain;
+  background-size: contain;
   background-repeat: no-repeat;
   border: 3px solid black;
   border-radius: 4px;
 }
 
 h2.nominations {
-  font-family: 'Quicksand', sans-serif;
-  display:grid;
+  font-family: "Quicksand", sans-serif;
+  display: grid;
   place-content: center;
-  text-align:center;
+  text-align: center;
   font-size: 2.2rem;
   height: 20%;
 }
 
-@media only screen and (max-width:500px){
+@media only screen and (max-width: 500px) {
   h2.nominations {
     font-size: 1.5rem;
     height: auto;
@@ -344,19 +358,19 @@ h2.nominations {
 }
 
 .nominated-title {
-  position:absolute;
+  position: absolute;
   top: 2rem;
   color: white;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: bold;
   text-shadow: 2px 2px 2px var(--color-black);
 }
 
 .nominated-stamp {
   text-transform: uppercase;
-  color: #FFC329;
-  font-size:2rem;
-  border: solid 2px #FFC329;
+  color: #ffc329;
+  font-size: 2rem;
+  border: solid 2px #ffc329;
   box-shadow: 2px 2px 4px #000000;
   text-shadow: 2px 2px 4px #000000;
   padding: 5px;
@@ -364,37 +378,36 @@ h2.nominations {
 }
 
 .dark-filter {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.733);
 }
 
 .remove-btn {
-  background-color: #BC0000;
-  border:none;
+  background-color: #bc0000;
+  border: none;
   padding: 0.5rem 2.5rem;
-  color:white;
-  font-family: 'Quicksand', sans-serif;
+  color: white;
+  font-family: "Quicksand", sans-serif;
   font-weight: bolder;
   text-transform: uppercase;
-  font-size:1.2rem;
+  font-size: 1.2rem;
   border-radius: 4px;
-  position:absolute;
-  top:70%;
-  left:50%;
+  position: absolute;
+  top: 70%;
+  left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
   .remove-btn:hover {
     background-color: #970101;
   }
 }
-
 
 .error-msg {
   margin-top: 1rem;
@@ -402,35 +415,39 @@ h2.nominations {
 }
 /*** LOADING ICON ***/
 .loading-container {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width:100%;
-  height:50vw;
+  width: 100%;
+  height: 50vw;
   text-align: center;
   height: calc(100vh - 15rem);
 }
 
 .loading-container > p {
-  color:#BC0000;
+  color: #bc0000;
 }
 
 .loading-image {
   border-radius: 50%;
-  width:3rem;
-  height:3rem;
-  border:inset 10px #BC0000;
+  width: 3rem;
+  height: 3rem;
+  border: inset 10px #bc0000;
   animation: spin 0.3s linear infinite;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 @keyframes spin {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.placeHolderImg-container{
+.placeHolderImg-container {
   display: flex;
   justify-content: center;
 }
@@ -442,13 +459,12 @@ h2.nominations {
 
 /*Clear All and Load More Button Styling */
 .button-container {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 5rem;
 }
-
 
 .button {
   width: 15rem;
@@ -461,29 +477,29 @@ h2.nominations {
   cursor: pointer;
 }
 .button p {
-  color:white;
+  color: white;
   text-transform: uppercase;
 }
 
 /* Balloons */
 .balloon1 {
-  position:fixed;
+  position: fixed;
   animation: balloonMove;
   pointer-events: none;
-  left:-20rem;
+  left: -20rem;
 }
 
 .balloon2 {
-  position:fixed;
+  position: fixed;
   animation: balloonMove;
   pointer-events: none;
-  left:-20rem;
+  left: -20rem;
 }
 
 @keyframes balloonMove {
   from {
     bottom: -3%;
-    left:-2%;
+    left: -2%;
   }
   to {
     bottom: 100%;

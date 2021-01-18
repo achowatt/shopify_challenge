@@ -1,7 +1,7 @@
 import React from "react";
 import NominatedCard from "./NominatedCard";
 import PlaceHolderImg from "./PlaceHolderImg";
-import trophyV2 from "../trophy_v2.svg";
+import trophyV2 from "../assets/trophy_v2.svg";
 import ClearAllNominations from "./ClearAllNominations";
 import Balloons from "./Balloons";
 

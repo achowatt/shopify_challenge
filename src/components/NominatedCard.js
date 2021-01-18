@@ -1,6 +1,6 @@
 import React from "react";
 import NominatedCardRemove from "./NominatedCardRemove";
-import trophyV2 from "../trophy_v2.svg";
+import trophyV2 from "../assets/trophy_v2.svg";
 class NominatedCard extends React.Component {
   state = {isClicked: false};
 

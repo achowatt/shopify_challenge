@@ -1,11 +1,11 @@
-import "../App.css";
+import "./App.css";
 import React from "react";
-import NominatedSection from "./NominatedSection";
-import MovieResultSection from "./MovieResultSection";
-import SearchBar from "./Searchbar";
-import WelcomeMessage from "./WelcomeMessage";
-import SeeNominations from "./SeeNominations";
-import LoadingImage from "./LoadingImage";
+import NominatedSection from "./components/NominatedSection";
+import MovieResultSection from "./components/MovieResultSection";
+import SearchBar from "./components/Searchbar";
+import WelcomeMessage from "./components/WelcomeMessage";
+import SeeNominations from "./components/SeeNominations";
+import LoadingImage from "./components/LoadingImage";
 import axios from "axios";
 
 class App extends React.Component {

@@ -1,5 +1,5 @@
 import React from "react";
-import trophy from "../trophy.svg";
+import trophy from "../assets/trophy.svg";
 
 class SeeNominations extends React.Component {
   state = {nominationListOpen: false};
