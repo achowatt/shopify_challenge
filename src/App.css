@@ -112,7 +112,6 @@ main {
   display:flex;
   flex-direction: column;
   color:white;
-  overflow-y: scroll;
 }
 
 main::-webkit-scrollbar {
@@ -126,6 +125,10 @@ main {
 
 .stop-scroll {
   overflow: hidden;
+}
+
+.auto-scroll {
+  overflow-y: scroll;
 }
 
 /* left section */
