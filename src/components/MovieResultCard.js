@@ -6,7 +6,9 @@ class MovieResultCard extends React.Component {
         const nominated = this.props.nominationList.find((movie)=>{
             if (movie.imdbID === this.props.imdbID){
                 return true;
-            } 
+            } else {
+                return false;
+            }
         });
 
         return (
