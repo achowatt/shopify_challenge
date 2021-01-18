@@ -22,6 +22,14 @@ class App extends React.Component {
     fiveNominations: false,
   };
 
+  updateBodyStyles = () => {
+    if (this.state.seeNominations) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "visible";
+    }
+  }
+
   reachedFiveNominations = () => {
     return this.setState({
       fiveNominations: true, seeNominations: true
@@ -65,6 +73,7 @@ class App extends React.Component {
 
   onNominationButtonClick = (clickStatus) => {
     this.setState({seeNominations: clickStatus});
+    this.updateBodyStyles();
   }
 
   onClear = () => {
