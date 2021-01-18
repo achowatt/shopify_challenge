@@ -1,26 +1,26 @@
-import React from 'react';
-import trophy from '../trophy.svg';
+import React from "react";
+import trophy from "../trophy.svg";
 
 class SeeNominations extends React.Component {
+  state = {nominationListOpen: false};
 
-    state = {nominationListOpen: false}
+  onNominationButtonClick = () => {
+    this.setState({nominationListOpen: !this.state.nominationListOpen});
+    this.props.onClick(this.state.nominationListOpen);
+  };
 
-    onNominationButtonClick = () => {
-        this.setState({nominationListOpen: !this.state.nominationListOpen});
-        this.props.onClick(this.state.nominationListOpen);
-    };
-
-    render() {
-        return (
-            <button type="button" className="see-nominations" onClick={this.onNominationButtonClick}>
-                <img src={trophy} alt="trophy"></img>
-                <p>My Nominations</p>
-                {/* {!this.state.nominationListOpen ? <p>Back to Movies</p>: <p>See Nominations</p>} */}
-            </button>
-        )
-    }
+  render() {
+    return (
+      <button
+        type="button"
+        className="see-nominations"
+        onClick={this.onNominationButtonClick}
+      >
+        <img src={trophy} alt="trophy"></img>
+        <p>My Nominations</p>
+      </button>
+    );
+  }
 }
 
 export default SeeNominations;
-
-
