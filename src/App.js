@@ -17,6 +17,7 @@ class App extends React.Component {
     queryStatus: "",
     page: 1,
     totalResults: 0,
+    loading: false,
     seeNominations: false,
     fiveNominations: false,
   };
@@ -37,6 +38,14 @@ class App extends React.Component {
   };
 
   onSearchSubmit = async (term) => {
+    if (!term) {
+      this.setState({
+        errorMessage: "",
+        movieResults: [],
+      });
+      return;
+    }
+    this.setState({loading: true});
     const response = await axios.get(`https://www.omdbapi.com/`, {
       params: {
         apikey: "c69b3d4a",
@@ -46,6 +55,7 @@ class App extends React.Component {
         page: 1,
       },
     });
+    this.setState({loading: false});
     if (response.data.Response === "True") {
       this.setState({
         movieResults: response.data.Search,
@@ -56,8 +66,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
-        errorMessage:
-          "No results found! Please type valid characters with minimum of 3 letters.",
+        errorMessage: "No results found!",
       });
     }
   };
@@ -150,13 +159,12 @@ class App extends React.Component {
         </header>
         <main className={this.state.seeNominations ? "stop-scroll" : "auto-scroll"}>
           <section className="search-result-section">
-            {this.state.errorMessage !== "" ? (
-              <p className="error-msg"> {this.state.errorMessage} </p>
-            ) : (
-              ""
+            {this.state.errorMessage && (
+              <p className="error-msg">{this.state.errorMessage}</p>
             )}
-            {this.state.errorMessage !== "" ? (
-              <LoadingImage />
+            {this.state.loading && <LoadingImage />}
+            {this.state.errorMessage ? (
+              ""
             ) : this.state.movieResults.length ? (
               <MovieResultSection
                 fiveNominations={this.state.fiveNominations}
